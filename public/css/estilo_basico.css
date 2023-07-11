@@ -110,14 +110,14 @@ button:hover {
 }
 
 .esquerda {
-    float:left;
+    float: left;
     background-color: #268fd0;
     width: 60%;
     height: 100%;
 }
 
 .direita {
-    float:right;
+    float: right;
     background-color: #2a9ee2;
     width: 40%;
     height: 100%;
@@ -170,7 +170,7 @@ button:hover {
     margin-top: 30px;
 }
 
-.informacao-pagina p{
+.informacao-pagina p {
     color: #333;
 }
 
@@ -180,7 +180,7 @@ button:hover {
 
 .redes-sociais, .area-contato, .localizacao {
     width: 33.333%;
-    border-top:solid 1px #ccc;
+    border-top: solid 1px #ccc;
     float: left;
     text-align: center;
     background-color: #f8f8f8;
@@ -193,4 +193,14 @@ button:hover {
 
 .redes-sociais img {
     margin: 0px 15px 0px 15px;
+}
+
+.pagination li {
+    display: inline;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.pagination ul {
+    list-style-type: none;
 }
