@@ -27,17 +27,37 @@ class ProdutoController extends Controller
     public function create()
     {
         $unidades = Unidade::all();
-        return view('app.produto.create',['unidades' => $unidades]);
+        return view('app.produto.create', ['unidades' => $unidades]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+
+        $regras = [
+            'nome' => 'required|min:3|max:40',
+            'descricao' => 'required|min:3|max:2000',
+            'peso' => 'required|integer',
+            'unidade_id' => 'exists:unidades,id'
+        ];
+
+        $feedback = [
+            'required' => 'O campo :attribute deve ser preenchido',
+            'nome.min' => 'O campo nome deve ter no mínimo 3 caracteres',
+            'nome.max' => 'O campo nome deve ter no máximo 40 caracteres',
+            'descricao.min' => 'O campo descrição deve ter no mínimo 3 caracteres',
+            'descricao.max' => 'O campo descrição deve ter no máximo 2000 caracteres',
+            'peso.integer' => 'O campo peso deve ser um número inteiro',
+            'unidade_id.exists' => 'A unidade de medida informada não existe'
+        ];
+
+        $request->validate($regras,$feedback);
+
         Produto::create($request->all());
         return redirect()->route('produto.index');
     }
@@ -45,7 +65,7 @@ class ProdutoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Produto  $produto
+     * @param \App\Produto $produto
      * @return \Illuminate\Http\Response
      */
     public function show(Produto $produto)
@@ -56,7 +76,7 @@ class ProdutoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Produto  $produto
+     * @param \App\Produto $produto
      * @return \Illuminate\Http\Response
      */
     public function edit(Produto $produto)
@@ -67,8 +87,8 @@ class ProdutoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Produto  $produto
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Produto $produto
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Produto $produto)
@@ -79,7 +99,7 @@ class ProdutoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Produto  $produto
+     * @param \App\Produto $produto
      * @return \Illuminate\Http\Response
      */
     public function destroy(Produto $produto)
