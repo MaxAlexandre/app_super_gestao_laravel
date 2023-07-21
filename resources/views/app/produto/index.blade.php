@@ -26,6 +26,7 @@
                         <th>Unidade ID</th>
                         <th></th>
                         <th></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -35,15 +36,17 @@
                             <td>{{$produto->descricao}}</td>
                             <td>{{$produto->peso}}</td>
                             <td>{{$produto->unidade_id}}</td>
+                            <td><a href="{{route('produto.show', ['produto' => $produto->id ])}}">Visualizar</a></td>
                             <td><a href="{{route('app.fornecedor.excluir',$produto->id)}}">Excluir</a></td>
-                            <td><a href="{{route('app.fornecedor.editar',$produto->id)}}">Editar</a></td>
+                            <td><a href="{{route('produto.edit',['produto'=>$produto->id])}}">Editar</a></td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
                 {{$produtos->appends($request)->links()}}
                 <br>
-                Exibindo {{$produtos->count()}} fornecedores de {{$produtos->total()}} (de {{$produtos->firstItem()}} a {{$produtos->lastItem()}})
+                Exibindo {{$produtos->count()}} fornecedores de {{$produtos->total()}} (de {{$produtos->firstItem()}}
+                a {{$produtos->lastItem()}})
             </div>
         </div>
     </div>
