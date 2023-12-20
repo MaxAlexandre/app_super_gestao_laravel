@@ -47,12 +47,25 @@
                             <td>{{$produto->produtoDetalhe->altura ?? ''}}</td>
                             <td>{{$produto->produtoDetalhe->largura ?? ''}}</td>
                             <td><a href="{{route('produto.show', ['produto' => $produto->id ])}}">Visualizar</a></td>
-                            <form id="form_{{$produto->id}}" method="post" action="{{route('produto.destroy', ['produto' => $produto->id])}}">
+                            <form id="form_{{$produto->id}}" method="post"
+                                  action="{{route('produto.destroy', ['produto' => $produto->id])}}">
                                 @method('DELETE')
                                 @csrf
-                                <td><a href="#" onclick="document.getElementById('form_{{$produto->id}}').submit()">Excluir</a></td>
+                                <td><a href="#" onclick="document.getElementById('form_{{$produto->id}}').submit()">Excluir</a>
+                                </td>
                             </form>
                             <td><a href="{{route('produto.edit',['produto'=>$produto->id])}}">Editar</a></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="12">
+                                <p>Pedidos</p>
+                                @foreach($produto->pedidos as $pedido)
+                                    <a href="{{route('pedido-produto.create', ['pedido' => $pedido->id])}}">
+                                        Pedido: {{$pedido->id}},
+                                    </a>
+                                @endforeach
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
